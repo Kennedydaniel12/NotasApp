@@ -23,7 +23,9 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Button title="Adicionar Nota" onPress={() => router.push('/create-note')} color="#6200ee" />
+      <View style={styles.buttonContainer}>
+        <Button title="Adicionar Nota" onPress={() => router.push('/create-note')} color="#6200ee" />
+      </View>
       <FlatList
         data={notes}
         keyExtractor={(item) => item.id}
@@ -46,6 +48,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#f4f4f4',
+  },
+  buttonContainer: {
+    marginBottom: 20, // Ajuste o valor para aumentar ou diminuir o espaço entre o botão e a lista
   },
   noteItem: {
     backgroundColor: '#fff',

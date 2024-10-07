@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ViewNote() {
@@ -24,18 +24,43 @@ export default function ViewNote() {
   }, [id]);
 
   if (!note) {
-    return <Text>Carregando...</Text>;
+    return <Text style={styles.loadingText}>Carregando...</Text>;
   }
 
   return (
-    <View style={{ flex: 1, padding: 20 }}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{note.title}</Text>
-      <Text style={{ fontSize: 16, marginVertical: 10 }}>{note.content}</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>{note.title}</Text>
+      <Text style={styles.content}>{note.content}</Text>
       <Button
         title="Excluir Nota"
         onPress={() => router.push(`/delete-confirmation?id=${note.id}`)}
+        color="#e53935"
       />
     </View>
   );
 }
-  
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f4f4f4',
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
+  content: {
+    fontSize: 16,
+    color: '#555',
+    marginBottom: 20,
+  },
+  loadingText: {
+    fontSize: 16,
+    color: '#999',
+    textAlign: 'center',
+    marginTop: 20,
+  },
+});

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert } from 'react-native';
+import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 
@@ -27,11 +27,8 @@ export default function CreateNote() {
       notes.push(newNote);
 
       await AsyncStorage.setItem('notes', JSON.stringify(notes));
-      console.log('Nota salva com sucesso:', newNote);
-      console.log('Todas as notas:', notes);
-
       Alert.alert('Sucesso', 'Nota salva com sucesso!');
-      router.push('/'); // Volta para a tela inicial
+      router.push('/');
     } catch (error) {
       Alert.alert('Erro', 'Não foi possível salvar a nota.');
       console.error('Erro ao salvar nota:', error);
@@ -39,21 +36,47 @@ export default function CreateNote() {
   };
 
   return (
-    <View style={{ flex: 1, padding: 20 }}>
+    <View style={styles.container}>
       <TextInput
         placeholder="Título da Nota"
         value={title}
         onChangeText={setTitle}
-        style={{ fontSize: 18, marginBottom: 10 }}
+        style={styles.input}
       />
       <TextInput
         placeholder="Conteúdo da Nota"
         value={content}
         onChangeText={setContent}
-        style={{ fontSize: 16, marginBottom: 20 }}
+        style={[styles.input, styles.contentInput]}
         multiline
       />
-      <Button title="Salvar Nota" onPress={handleSave} />
+      <View style={styles.buttonContainer}>
+        <Button title="Salvar Nota" onPress={handleSave} color="#6200ee" />
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f4f4f4',
+  },
+  input: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 15,
+    fontSize: 16,
+    marginBottom: 10,
+    borderColor: '#ddd',
+    borderWidth: 1,
+  },
+  contentInput: {
+    height: 150,
+    textAlignVertical: 'top',
+  },
+  buttonContainer: {
+    marginTop: 20,
+  },
+});

@@ -7,7 +7,7 @@ import { View, StyleSheet } from 'react-native';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import BottomMenu from '../components/BottomMenu'; 
+import BottomMenu from '../components/BottomMenu'; // Importação do menu inferior
 
 
 SplashScreen.preventAutoHideAsync();
@@ -35,7 +35,7 @@ export default function RootLayout() {
 
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
+            <Stack.Screen name="+not-found" options={{ headerShown: false }} /> {/* Remove o header para a rota "not-found" */}
           </Stack>
         </View>
 

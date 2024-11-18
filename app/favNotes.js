@@ -29,7 +29,7 @@ const Favoritas = () => {
         data={favoriteNotes}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/nota/${item.id}`)}>
+          <TouchableOpacity onPress={() => router.push(`/view-note?id=${item.id}`)}>
             <View style={styles.noteItem}>
               <Text style={styles.noteTitle}>{item.title}</Text>
               <Text style={styles.noteContent}>{item.content.substring(0, 40)}...</Text>

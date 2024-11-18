@@ -56,6 +56,21 @@ export default function ViewNote() {
     }
   };
 
+  const handleDeleteNote = async () => {
+    try {
+      const storedNotes = await AsyncStorage.getItem('notes');
+      const notes = storedNotes ? JSON.parse(storedNotes) : [];
+      const updatedNotes = notes.filter((note) => note.id !== id); // Remove a nota com o ID correspondente
+
+      await AsyncStorage.setItem('notes', JSON.stringify(updatedNotes));
+      Alert.alert('Sucesso', 'Nota excluída com sucesso!');
+      router.push('/'); // Redireciona para a página inicial após excluir
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível excluir a nota.');
+      console.error('Erro ao excluir a nota:', error);
+    }
+  };
+
   if (!note) {
     return <Text style={styles.loadingText}>Carregando...</Text>;
   }
@@ -87,7 +102,7 @@ export default function ViewNote() {
           <Button title="Editar Nota" onPress={() => setIsEditing(true)} color="#6200ee" />
           <Button
             title="Excluir Nota"
-            onPress={() => router.push(`/delete-confirmation?id=${note.id}`)}
+            onPress={handleDeleteNote} // Função de exclusão direta
             color="#e53935"
           />
         </>

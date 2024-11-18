@@ -9,15 +9,15 @@ const BottomMenu: React.FC = () => {
     <View style={styles.container}>
       <TouchableOpacity 
         style={styles.button} 
-        onPress={() => router.push('/create-note')} // Navega para a rota de criação de notas
+        onPress={() => router.push('/')} // Navega para a página inicial
       >
-        <Text style={styles.text}>Criar Nota</Text>
+        <Text style={styles.text}>Minhas Notas</Text>
       </TouchableOpacity>
       <TouchableOpacity 
         style={styles.button} 
-        onPress={() => router.push('/')} // Navega para a página inicial
+        onPress={() => router.push('/create-note')} // Navega para a rota de criação de notas
       >
-        <Text style={styles.text}>Visualizar Notas</Text>
+        <Text style={styles.text}>Criar Nota</Text>
       </TouchableOpacity>
       <TouchableOpacity 
         style={styles.button} 

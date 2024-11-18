@@ -54,6 +54,11 @@ const VisualizarNotas = () => {
     filterNotes(text);
   };
 
+  // Função de navegação ao clicar na nota
+  const navigateToNote = (id) => {
+    router.push(`/view-note?id=${id}`); // Roteia para a página de visualização/edição
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -68,13 +73,13 @@ const VisualizarNotas = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.noteItem}>
-            <View style={styles.noteContentWrapper}>
+            <TouchableOpacity onPress={() => navigateToNote(item.id)} style={styles.noteContentWrapper}>
               <Text style={styles.noteTitle}>{item.title}</Text>
               {/* Exibe a prévia do conteúdo da nota */}
               <Text style={styles.notePreview}>
                 {item.content.substring(0, 60)}...
               </Text> {/* Exibe os primeiros 60 caracteres da nota */}
-            </View>
+            </TouchableOpacity>
 
             {/* Botão de favoritar com símbolo de estrela */}
             <TouchableOpacity onPress={() => toggleFavorite(item.id)}>

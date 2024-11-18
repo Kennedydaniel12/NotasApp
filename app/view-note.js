@@ -100,15 +100,19 @@ export default function ViewNote() {
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.content}>{content}</Text>
           <Button title="Editar Nota" onPress={() => setIsEditing(true)} color="#6200ee" />
-          <Button
-            title="Excluir Nota"
-            onPress={handleDeleteNote} // Função de exclusão direta
-            color="#e53935"
-          />
+          {/* Adicionando margem entre os botões */}
+          <View style={styles.buttonContainer}>
+            <Button
+              title="Excluir Nota"
+              onPress={handleDeleteNote} // Função de exclusão direta
+              color="#e53935"
+            />
+          </View>
         </>
       )}
     </View>
   );
+  
 }
 
 const styles = StyleSheet.create({
@@ -148,4 +152,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
   },
+  buttonContainer: {
+    marginTop: 10, // Isso cria um espaço entre o botão "Editar Nota" e "Excluir Nota"
+  },
 });
+
